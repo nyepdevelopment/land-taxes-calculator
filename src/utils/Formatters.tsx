@@ -19,3 +19,11 @@ export function CalculateCompromiseHandler(basicTaxes: number) {
 		return 0;
 	}
 }
+
+export function ValueToPeso(value: number) {
+	return value.toLocaleString("en-US", {
+		style: "currency",
+		currency: "PHP",
+		maximumFractionDigits: 2,
+	});
+}

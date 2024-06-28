@@ -3,7 +3,7 @@ import "../app/globals.css";
 import InputField from "../components/form/InputField";
 import { useState } from "react";
 import CompromiseTable from "../components/compromisetable";
-import { CalculateCompromiseHandler } from "../utils/Formatters";
+import { CalculateCompromiseHandler, ValueToPeso } from "../utils/Formatters";
 
 export default function Home() {
 	const [saleValue, setSaleValue] = useState<number>(0);
@@ -23,18 +23,18 @@ export default function Home() {
 		<Container>
 			<div className="max-w-[500px] mx-auto w-full">
 				<h1 className="text-[1.4rem] font-[700] text-center">LAND TAXES CALCULATOR</h1>
-				<InputField className="mt-4" type="number" placeholder="Sale Value (in Peso)" defaultValue={saleValue} onChange={(e) => setSaleValue(+e.currentTarget.value)} />
-				<InputField className="mt-2" type="number" placeholder="Penalty (in years)" defaultValue={yearsPenalty} onChange={(e) => setYearsPenalty(+e.currentTarget.value)} />
+				<InputField name="saleValue" className="mt-4" type="number" label="Sale Value" placeholder="0" defaultValue={0} onChange={(e) => setSaleValue(+e.currentTarget.value)} />
+				<InputField name="yearsPenalty" className="mt-2" type="number" label="Years Penalty" placeholder="0" defaultValue={0} onChange={(e) => setYearsPenalty(+e.currentTarget.value)} />
 
 				<h2 className="mt-4 text-[1.25rem] font-[700]">BASIC TAXES</h2>
 				<hr className="mt-1 border-black" />
 				<div className="mt-2 flex flex-col gap-1">
 					<p>
-						= <b title={cgt.toString()}>CGT&#40;6% of Sale&#41;</b> + <b title={dst.toString()}>DST&#40;1.5% of Sale&#41;</b> x <b>20%</b> x{" "}
+						= <b title={ValueToPeso(cgt)}>CGT&#40;6% of Sale&#41;</b> + <b title={ValueToPeso(dst)}>DST&#40;1.5% of Sale&#41;</b> x <b>20%</b> x{" "}
 						<b title={yearsPenalty.toString()}>Years of Penalty</b>
 					</p>
 					<p>
-						= <u>{basicTaxes}</u>
+						= {ValueToPeso(basicTaxes)}
 					</p>
 				</div>
 
@@ -42,10 +42,10 @@ export default function Home() {
 				<hr className="mt-1 border-black" />
 				<div className="mt-2 flex flex-col gap-1">
 					<p>
-						= <b title={basicTaxes.toString()}>BASIC TAXES</b> x <b>25%</b>
+						= <b title={ValueToPeso(basicTaxes)}>BASIC TAXES</b> x <b>25%</b>
 					</p>
 					<p>
-						= <u>{surcharge}</u>
+						= {ValueToPeso(surcharge)}
 					</p>
 				</div>
 
@@ -58,10 +58,10 @@ export default function Home() {
 				<hr className="mt-1 border-black" />
 				<div className="mt-2 flex flex-col gap-1">
 					<p>
-						= <b title={basicTaxes.toString()}>BASIC TAXES</b> + <b title={surcharge.toString()}>SURCHARGE</b> + <b title={compromise.toString()}>COMPROMISE</b>
+						= <b title={ValueToPeso(basicTaxes)}>BASIC TAXES</b> + <b title={ValueToPeso(surcharge)}>SURCHARGE</b> + <b title={ValueToPeso(compromise)}>COMPROMISE</b>
 					</p>
 					<p>
-						= <u>{penalties}</u>
+						= {ValueToPeso(penalties)}
 					</p>
 				</div>
 
@@ -69,10 +69,10 @@ export default function Home() {
 				<hr className="mt-1 border-black" />
 				<div className="mt-2 flex flex-col gap-1">
 					<p>
-						= <b title={basicTaxes.toString()}>BASIC TAXES</b> + <b title={penalties.toString()}>PENALTIES</b>
+						= <b title={ValueToPeso(basicTaxes)}>BASIC TAXES</b> + <b title={ValueToPeso(penalties)}>PENALTIES</b>
 					</p>
 					<p>
-						= <u>{basicTaxes + penalties}</u>
+						= {ValueToPeso(basicTaxes + penalties)}
 					</p>
 				</div>
 			</div>
