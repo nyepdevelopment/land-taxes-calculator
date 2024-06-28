@@ -59,7 +59,7 @@ export default function Home() {
 				<div className="mt-2 flex flex-col gap-1">
 					<p>= PENALTIES + BASIC TAXES</p>
 					<p>
-						= <u>{penalties}</u>
+						= <u>{penalties + basicTaxes}</u>
 					</p>
 				</div>
 			</div>
