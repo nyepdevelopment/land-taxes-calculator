@@ -1,4 +1,4 @@
-import Container from "../components/Container";
+import Layout from "../components/Layout";
 import "../app/globals.css";
 import InputField from "../components/form/InputField";
 import { useState } from "react";
@@ -22,9 +22,9 @@ export default function Home() {
 	const transferFees = saleValue * 0.015;
 
 	return (
-		<Container>
+		<Layout pageTitle="Deed and Transfer Title Taxes">
 			<div className="max-w-[600px] mx-auto w-full">
-				<h1 className="text-[1.6rem] font-[700] text-center">LAND TAXES FOR DEED REGISTRATION AND TRANSFER TITLE CALCULATOR</h1>
+				<h1 className="text-[1.6rem] font-[700] text-center uppercase">Deed and Transfer Title Taxes</h1>
 				<InputField name="saleValue" className="mt-4" type="number" label="Sale Value" placeholder="0" onChange={(e) => setSaleValue(+e.currentTarget.value)} />
 				<InputField name="yearsPenalty" className="mt-2" type="number" label="Years Penalty" placeholder="0" onChange={(e) => setYearsPenalty(+e.currentTarget.value)} />
 
@@ -88,6 +88,6 @@ export default function Home() {
 					<iframe width="100%" height="315" src="https://www.youtube.com/embed/Ma0cCJN09aM?si=0PiP3lo4fXf4YtP7" allowFullScreen />
 				</div>
 			</div>
-		</Container>
+		</Layout>
 	);
 }
