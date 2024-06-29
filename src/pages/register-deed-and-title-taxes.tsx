@@ -19,28 +19,14 @@ export default function Home() {
 
 	const penalties = basicTaxes + compromise + surcharge;
 
+	const transferFees = saleValue * 0.015;
+
 	return (
 		<Container>
 			<div className="max-w-[600px] mx-auto w-full">
-				<h1 className="text-[1.6rem] font-[700] text-center">LAND TAXES FOR DEED REGISTRATION CALCULATOR</h1>
-				<InputField
-					name="saleValue"
-					className="mt-4"
-					type="number"
-					label="Sale Value"
-					placeholder="0"
-					defaultValue={0}
-					onChange={(e) => setSaleValue(+e.currentTarget.value)}
-				/>
-				<InputField
-					name="yearsPenalty"
-					className="mt-2"
-					type="number"
-					label="Years Penalty"
-					placeholder="0"
-					defaultValue={0}
-					onChange={(e) => setYearsPenalty(+e.currentTarget.value)}
-				/>
+				<h1 className="text-[1.6rem] font-[700] text-center">LAND TAXES FOR DEED REGISTRATION AND TRANSFER TITLE CALCULATOR</h1>
+				<InputField name="saleValue" className="mt-4" type="number" label="Sale Value" placeholder="0" onChange={(e) => setSaleValue(+e.currentTarget.value)} />
+				<InputField name="yearsPenalty" className="mt-2" type="number" label="Years Penalty" placeholder="0" onChange={(e) => setYearsPenalty(+e.currentTarget.value)} />
 
 				<h2 className="mt-4 text-[1.25rem] font-[700]">BASIC TAXES</h2>
 				<hr className="mt-1 border-black" />
@@ -62,7 +48,9 @@ export default function Home() {
 				</div>
 
 				<h2 className="mt-4 text-[1.25rem] font-[700]">COMPROMISE</h2>
-				<div className="mt-2 flex flex-col gap-1">
+				<hr className="mt-1 border-black" />
+				<div className="mt-2 flex flex-col gap-2">
+					<p>= {ValueToPeso(compromise)}</p>
 					<CompromiseTable basicTaxes={basicTaxes} />
 				</div>
 
@@ -75,19 +63,29 @@ export default function Home() {
 					<p>= {ValueToPeso(penalties)}</p>
 				</div>
 
+				<h2 className="mt-4 text-[1.25rem] font-[700]">TRANSFER FEES</h2>
+				<hr className="mt-1 border-black" />
+				<div className="mt-2 flex flex-col gap-1">
+					<p>
+						= <b title={ValueToPeso(basicTaxes)}>BASIC TAXES</b> x <b>1.5%</b>
+					</p>
+					<p>= {ValueToPeso(transferFees)}</p>
+				</div>
+
 				<h2 className="mt-4 text-[1.25rem] font-[700]">OVERALL</h2>
 				<hr className="mt-1 border-black" />
 				<div className="mt-2 flex flex-col gap-1">
 					<p>
-						= <b title={ValueToPeso(basicTaxes)}>BASIC TAXES</b> + <b title={ValueToPeso(penalties)}>PENALTIES</b>
+						= <b title={ValueToPeso(basicTaxes)}>BASIC TAXES</b> + <b title={ValueToPeso(penalties)}>PENALTIES</b> +{" "}
+						<b title={ValueToPeso(transferFees)}>TRANSFER FEES</b>
 					</p>
-					<p>= {ValueToPeso(basicTaxes + penalties)}</p>
+					<p>= {ValueToPeso(basicTaxes + penalties + transferFees)}</p>
 				</div>
 
 				<h2 className="mt-4 text-[1.25rem] font-[700]">REFERENCE</h2>
 				<hr className="mt-1 border-black" />
 				<div className="mt-4 flex flex-col gap-1">
-					<iframe width="100%" height="315" src="https://www.youtube.com/embed/Ma0cCJN09aM?si=0PiP3lo4fXf4YtP7" allowFullScreen/>
+					<iframe width="100%" height="315" src="https://www.youtube.com/embed/Ma0cCJN09aM?si=0PiP3lo4fXf4YtP7" allowFullScreen />
 				</div>
 			</div>
 		</Container>
