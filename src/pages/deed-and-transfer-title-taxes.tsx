@@ -67,7 +67,7 @@ export default function Home() {
 				<hr className="mt-1 border-black" />
 				<div className="mt-2 flex flex-col gap-1">
 					<p>
-						= <b title={ValueToPeso(basicTaxes)}>BASIC TAXES</b> x <b>1.5%</b>
+						= <b title={ValueToPeso(saleValue)}>Sale Value</b> x <b>1.5%</b>
 					</p>
 					<p>= {ValueToPeso(transferFees)}</p>
 				</div>
